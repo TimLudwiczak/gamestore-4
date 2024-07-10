@@ -19,9 +19,9 @@ CREATE TABLE game (
 
 DROP TABLE IF EXISTS genres CASCADE;
 
-CREATE TABLE genres (
+CREATE TABLE genre (
     genre_id SERIAL PRIMARY KEY,
-    genre VARCHAR(255) NOT NULL UNIQUE
+    genre_name VARCHAR(255) NOT NULL UNIQUE
 )
 
 DROP TABLE IF EXISTS genre_game CASCADE;
@@ -35,14 +35,14 @@ CREATE TABLE genre_game (
 );
 DROP TABLE IF EXISTS gaming_engines;
 
-CREATE TABLE gaming_engines (
+CREATE TABLE gaming_engine (
     engine_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
+    engine_name VARCHAR(100) NOT NULL UNIQUE
 );
 
-ALTER TABLE games
-ADD COLUMN engine_id INT,
-ADD FOREIGN KEY (engine_id) REFERENCES gaming_engines(engine_id);
+-- ALTER TABLE games
+-- ADD COLUMN engine_id INT,
+-- ADD FOREIGN KEY (engine_id) REFERENCES gaming_engines(engine_id);
 
 
 \COPY genre_game FROM './data/genre_game.csv' WITH CSV HEADER;
