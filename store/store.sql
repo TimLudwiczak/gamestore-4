@@ -1,6 +1,12 @@
 -- Drop the table if it exists
 DROP TABLE IF EXISTS game;
 
+DROP TABLE IF EXISTS genre;
+CREATE TABLE genre (
+    genre_id SERIAL PRIMARY KEY,
+    genre_name VARCHAR(255) UNIQUE NOT NULL CHECK (genre_name ~ )
+);
+
 -- Create Game Table
 CREATE TABLE game (
     game_id INT PRIMARY KEY,
@@ -8,7 +14,6 @@ CREATE TABLE game (
     quantity INT NOT NULL CHECK(quantity > 0 AND quantity < 51),
     price DECIMAL(5, 2) NOT NULL CHECK(price > 10 AND price < 60)
 );
-
 
 -- Insert Sample Data into Game Table
 \COPY game FROM './data/game.csv' WITH CSV HEADER;
@@ -154,5 +159,6 @@ CREATE TABLE shifts (
     employee_id INT,
     FOREIGN KEY (employee_id) REFERENCES employee(id)
 );
+
 
 \COPY shifts FROM './data/shifts.csv' WITH CSV HEADER;
